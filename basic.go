@@ -14,7 +14,6 @@
 
 // Package types contains declaration of various data types (usually structures)
 // used across the whole CCX data pipeline.
-
 package types
 
 // OrgID represents organization ID
