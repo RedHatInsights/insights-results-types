@@ -1,2 +1,3 @@
 # insights-results-types
-Common data types for the whole CCX data pipeline
+
+Common data types used across the whole CCX data pipeline.
