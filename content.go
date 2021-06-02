@@ -38,6 +38,7 @@ type RulePluginInfo struct {
 type RuleErrorKeyContent struct {
 	Generic   string           `json:"generic"`
 	Metadata  ErrorKeyMetadata `json:"metadata"`
+	TotalRisk int              `json:"total_risk"`
 	Reason    string           `json:"reason"`
 	HasReason bool
 }
