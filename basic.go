@@ -48,6 +48,6 @@ type KafkaOffset int64
 // DBDriver type for db driver enum
 type DBDriver int
 
-//SchemaVersion is just a constant integer for now, max value 255. If we one day
-//need more versions, better consider upgrading to semantic versioning.
+// SchemaVersion is just a constant integer for now, max value 255. If we one day
+// need more versions, better consider upgrading to semantic versioning.
 type SchemaVersion uint8
