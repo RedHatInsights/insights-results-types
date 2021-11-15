@@ -16,12 +16,13 @@ package types
 
 // RuleContent wraps all the content available for a rule into a single structure.
 type RuleContent struct {
-	Summary    string                         `json:"summary"`
-	Reason     string                         `json:"reason"`
-	Resolution string                         `json:"resolution"`
-	MoreInfo   string                         `json:"more_info"`
 	Plugin     RulePluginInfo                 `json:"plugin"`
 	ErrorKeys  map[string]RuleErrorKeyContent `json:"error_keys"`
+	Generic    string                         `json:"generic"`
+	Summary    string                         `json:"summary"`
+	Resolution string                         `json:"resolution"`
+	MoreInfo   string                         `json:"more_info"`
+	Reason     string                         `json:"reason"`
 	HasReason  bool
 }
 
@@ -36,23 +37,32 @@ type RulePluginInfo struct {
 
 // RuleErrorKeyContent wraps content of a single error key.
 type RuleErrorKeyContent struct {
-	Generic   string           `json:"generic"`
-	Metadata  ErrorKeyMetadata `json:"metadata"`
-	TotalRisk int              `json:"total_risk"`
-	Reason    string           `json:"reason"`
+	Metadata   ErrorKeyMetadata `json:"metadata"`
+	TotalRisk  int              `json:"total_risk"`
+	Generic    string           `json:"generic"`
+	Summary    string           `json:"summary"`
+	Resolution string           `json:"resolution"`
+	MoreInfo   string           `json:"more_info"`
+	Reason     string           `json:"reason"`
+	// DONTFIX has_reason until CCXDEV-5021
 	HasReason bool
 }
 
 // ErrorKeyMetadata is a Go representation of the `metadata.yaml`
 // file inside of an error key content directory.
 type ErrorKeyMetadata struct {
-	Condition   string   `yaml:"condition" json:"condition"`
 	Description string   `yaml:"description" json:"description"`
-	Impact      string   `yaml:"impact" json:"impact"`
+	Impact      Impact   `yaml:"impact" json:"impact"`
 	Likelihood  int      `yaml:"likelihood" json:"likelihood"`
 	PublishDate string   `yaml:"publish_date" json:"publish_date"`
 	Status      string   `yaml:"status" json:"status"`
 	Tags        []string `yaml:"tags" json:"tags"`
+}
+
+// Impact is contained in ErrorKeyMetadata
+type Impact struct {
+	Name   string `yaml:"name" json:"name"`
+	Impact int    `yaml:"impact" json:"impact"`
 }
 
 // RuleContentDirectory contains content for all available rules in a directory.
