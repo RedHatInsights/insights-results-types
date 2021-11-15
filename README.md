@@ -6,8 +6,6 @@
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/RedHatInsights/insights-results-types)
 [![License](https://img.shields.io/badge/license-Apache-blue)](https://github.com/RedHatInsights/insights-results-types/blob/master/LICENSE)
 
-https://app.travis-ci.com/github/RedHatInsights/insights-results-types
-
 ## Description
 
 Common data types used across the whole CCX data pipeline.
