@@ -76,3 +76,38 @@ type RuleContentDirectory struct {
 type GlobalRuleConfig struct {
 	Impact map[string]int `yaml:"impact" json:"impact"`
 }
+
+// RuleContentV2 version 2 of RuleContent provided by smart proxy
+type RuleContentV2 struct {
+	Plugin     RulePluginInfo                   `json:"plugin"`
+	ErrorKeys  map[string]RuleErrorKeyContentV2 `json:"error_keys"`
+	Generic    string                           `json:"generic"`
+	Summary    string                           `json:"summary"`
+	Resolution string                           `json:"resolution"`
+	MoreInfo   string                           `json:"more_info"`
+	Reason     string                           `json:"reason"`
+	HasReason  bool
+}
+
+// RuleErrorKeyContentV2 is in RuleContentV2
+type RuleErrorKeyContentV2 struct {
+	Metadata   ErrorKeyMetadataV2 `json:"metadata"`
+	TotalRisk  int                `json:"total_risk"`
+	Generic    string             `json:"generic"`
+	Summary    string             `json:"summary"`
+	Resolution string             `json:"resolution"`
+	MoreInfo   string             `json:"more_info"`
+	Reason     string             `json:"reason"`
+	// DONTFIX has_reason until CCXDEV-5021
+	HasReason bool
+}
+
+// ErrorKeyMetadataV2 is in RuleErrorKeyContentV2
+type ErrorKeyMetadataV2 struct {
+	Description string   `yaml:"description" json:"description"`
+	Impact      int      `yaml:"impact" json:"impact"`
+	Likelihood  int      `yaml:"likelihood" json:"likelihood"`
+	PublishDate string   `yaml:"publish_date" json:"publish_date"`
+	Status      string   `yaml:"status" json:"status"`
+	Tags        []string `yaml:"tags" json:"tags"`
+}
