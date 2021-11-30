@@ -368,3 +368,12 @@ type RuleType string
 // occured during reading, parsing, and checking rule content in Content
 // Service
 type RuleParsingError string
+
+// ClusterRecommendationList is used for the clusters list
+type ClusterRecommendationList struct {
+	CreatedAt       time.Time `json:"created_at"`
+	Recommendations []RuleID  `json:"recommendations"`
+}
+
+// ClusterRecommendationMap is used for the clusters list
+type ClusterRecommendationMap map[ClusterName]ClusterRecommendationList
