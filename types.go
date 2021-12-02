@@ -82,8 +82,16 @@ type ReportResponse struct {
 	Report []RuleOnReport     `json:"reports"`
 }
 
-// ReportResponseMeta contains metadata about the report
+// ReportResponseMeta contains metadata about the report that is part of
+// ReportResponse structure
 type ReportResponseMeta struct {
+	Count         int       `json:"count"`
+	LastCheckedAt Timestamp `json:"last_checked_at"`
+}
+
+// ReportResponseMetainfo contains just metadata about the report, to be used
+// separately from ReportResponse structure
+type ReportResponseMetainfo struct {
 	Count         int       `json:"count"`
 	LastCheckedAt Timestamp `json:"last_checked_at"`
 	StoredAt      Timestamp `json:"stored_at"`
