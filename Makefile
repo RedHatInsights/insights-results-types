@@ -52,3 +52,12 @@ help: ## Show this help screen
 	@grep -E '^[ a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo ''
+
+docs/packages/%.html: %.go
+	mkdir -p $(dir $@)
+	docgo -outdir $(dir $@) $^
+	addlicense -c "Red Hat, Inc" -l "apache" -v $@
+
+godoc: export GO111MODULE=off
+godoc: install_docgo install_addlicense ${DOCFILES}
+
