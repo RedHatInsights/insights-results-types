@@ -244,6 +244,14 @@ type HittingClusters struct {
 	Status      string                  `json:"status"`
 }
 
+// DisabledClusterInfo represents information about disabled clusters for /clusters_detail
+type DisabledClusterInfo struct {
+	ClusterID     ClusterName `json:"cluster_id"`
+	ClusterName   string      `json:"cluster_name"`
+	DisabledAt    time.Time   `json:"disabled_at"`
+	Justification string      `json:"justification"`
+}
+
 // DatabaseVersion specifies the latest version the database has been migrated
 // to. It might be zero in case of any migration issue.
 type DatabaseVersion uint
