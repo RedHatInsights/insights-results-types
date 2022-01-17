@@ -230,9 +230,9 @@ type HittingClustersMetadata struct {
 
 // HittingClustersData used to store data of clusters hit by a concrete rule
 type HittingClustersData struct {
-	Cluster ClusterName `json:"cluster"`
-	Name    string      `json:"cluster_name"`
-	//GeneratedAt string      `json:"generated_at"`
+	Cluster  ClusterName `json:"cluster"`
+	Name     string      `json:"cluster_name"`
+	LastSeen string      `json:"generated_at"`
 	//Version     string      `json:"version"`
 }
 
