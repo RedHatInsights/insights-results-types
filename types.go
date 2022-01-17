@@ -232,7 +232,7 @@ type HittingClustersMetadata struct {
 type HittingClustersData struct {
 	Cluster  ClusterName `json:"cluster"`
 	Name     string      `json:"cluster_name"`
-	LastSeen string      `json:"generated_at"`
+	LastSeen string      `json:"last_checked_at"`
 	//Version     string      `json:"version"`
 }
 
