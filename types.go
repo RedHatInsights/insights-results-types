@@ -85,6 +85,7 @@ type ReportResponse struct {
 // ReportResponseMeta contains metadata about the report that is part of
 // ReportResponse structure
 type ReportResponseMeta struct {
+	DisplayName   string    `json:"cluster_name"`
 	Count         int       `json:"count"`
 	LastCheckedAt Timestamp `json:"last_checked_at"`
 }
