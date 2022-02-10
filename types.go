@@ -343,7 +343,7 @@ type SystemWideRuleDisable struct {
 type ImpactedClustersCnt uint32
 
 // RecommendationImpactedClusters is returned by aggregator for the purposes of /rule/ recommendation list endpoint
-type RecommendationImpactedClusters map[RuleID]ImpactedClustersCnt
+type RecommendationImpactedClusters map[RuleID][]ClusterName
 
 // RecommendationRow represents a single row in the recommendation table
 type RecommendationRow struct {
