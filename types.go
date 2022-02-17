@@ -87,7 +87,7 @@ type ReportResponse struct {
 type ReportResponseMeta struct {
 	DisplayName   string    `json:"cluster_name"`
 	Count         int       `json:"count"`
-	LastCheckedAt Timestamp `json:"last_checked_at"`
+	LastCheckedAt Timestamp `json:"last_checked_at,omitempty"`
 }
 
 // ReportResponseMetainfo contains just metadata about the report, to be used
