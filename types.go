@@ -97,6 +97,7 @@ type ReportResponseMetainfo struct {
 	Count         int       `json:"count"`
 	LastCheckedAt Timestamp `json:"last_checked_at"`
 	StoredAt      Timestamp `json:"stored_at"`
+	GatheredAt    Timestamp `json:"gathered_at"`
 }
 
 // RuleContentResponse represents a single rule in the response of /report endpoint
