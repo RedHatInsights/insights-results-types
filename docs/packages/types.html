@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2021 Red Hat, Inc
+ Copyright 2022 Red Hat, Inc
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -240,6 +240,14 @@ a unique identifier of payloads. Empty string represents a missing request ID.</
       </tr>
       
       <tr class="section">
+	<td class="doc"><p>Version represents the version of the cluster</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">Version</div> <div class="ident">string</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
 	<td class="doc"><p>RuleOnReport represents a single (hit) rule of the string encoded report</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">RuleOnReport</div> <div class="keyword">struct</div> <div class="operator">{</div>
@@ -284,8 +292,10 @@ a unique identifier of payloads. Empty string represents a missing request ID.</
 ReportResponse structure</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ReportResponseMeta</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">DisplayName</div>   <div class="ident">string</div>    <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
 	<div class="ident">Count</div>         <div class="ident">int</div>       <div class="literal">`json:&#34;count&#34;`</div><div class="operator"></div>
-	<div class="ident">LastCheckedAt</div> <div class="ident">Timestamp</div> <div class="literal">`json:&#34;last_checked_at&#34;`</div><div class="operator"></div>
+	<div class="ident">LastCheckedAt</div> <div class="ident">Timestamp</div> <div class="literal">`json:&#34;last_checked_at,omitempty&#34;`</div><div class="operator"></div>
+	<div class="ident">GatheredAt</div>    <div class="ident">Timestamp</div> <div class="literal">`json:&#34;gathered_at,omitempty&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -529,14 +539,14 @@ aggregator to return more reports.</p>
 	<td class="doc"><p>HittingClustersData used to store data of clusters hit by a concrete rule</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">HittingClustersData</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">Cluster</div> <div class="ident">ClusterName</div> <div class="literal">`json:&#34;cluster&#34;`</div><div class="operator"></div>
-	<div class="ident">Name</div>    <div class="ident">string</div>      <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
+	<div class="ident">Cluster</div>  <div class="ident">ClusterName</div> <div class="literal">`json:&#34;cluster&#34;`</div><div class="operator"></div>
+	<div class="ident">Name</div>     <div class="ident">string</div>      <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
+	<div class="ident">LastSeen</div> <div class="ident">string</div>      <div class="literal">`json:&#34;last_checked_at&#34;`</div><div class="operator"></div>
 </code></pre></td>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>GeneratedAt string      <code>json:&quot;generated_at&quot;</code>
-Version     string      <code>json:&quot;version&quot;</code></p>
+	<td class="doc"><p>Version     string      <code>json:&quot;version&quot;</code></p>
 </td>
 	<td class="code"><pre><code><div class="operator">}</div><div class="operator"></div>
 
@@ -551,6 +561,19 @@ hitting the given rule.</p>
 	<div class="ident">Metadata</div>    <div class="ident">HittingClustersMetadata</div> <div class="literal">`json:&#34;meta&#34;`</div><div class="operator"></div>
 	<div class="ident">ClusterList</div> <div class="operator">[</div><div class="operator">]</div><div class="ident">HittingClustersData</div>   <div class="literal">`json:&#34;data&#34;`</div><div class="operator"></div>
 	<div class="ident">Status</div>      <div class="ident">string</div>                  <div class="literal">`json:&#34;status&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>DisabledClusterInfo represents information about disabled clusters for /clusters_detail</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">DisabledClusterInfo</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">ClusterID</div>     <div class="ident">ClusterName</div> <div class="literal">`json:&#34;cluster_id&#34;`</div><div class="operator"></div>
+	<div class="ident">ClusterName</div>   <div class="ident">string</div>      <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
+	<div class="ident">DisabledAt</div>    <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div>   <div class="literal">`json:&#34;disabled_at&#34;`</div><div class="operator"></div>
+	<div class="ident">Justification</div> <div class="ident">string</div>      <div class="literal">`json:&#34;justification&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -713,7 +736,7 @@ cluster<em>user</em>rule<em>disable</em>feedback table</p>
       <tr class="section">
 	<td class="doc"><p>RecommendationImpactedClusters is returned by aggregator for the purposes of /rule/ recommendation list endpoint</p>
 </td>
-	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">RecommendationImpactedClusters</div> <div class="keyword">map</div><div class="operator">[</div><div class="ident">RuleID</div><div class="operator">]</div><div class="ident">ImpactedClustersCnt</div><div class="operator"></div>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">RecommendationImpactedClusters</div> <div class="keyword">map</div><div class="operator">[</div><div class="ident">RuleID</div><div class="operator">]</div><div class="operator">[</div><div class="operator">]</div><div class="ident">ClusterName</div><div class="operator"></div>
 
 </code></pre></td>
       </tr>
