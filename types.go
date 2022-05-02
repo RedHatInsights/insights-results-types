@@ -57,6 +57,9 @@ type RuleSelector string
 // Component represent name of component (of rule)
 type Component string
 
+// Version represents the version of the cluster
+type Version string
+
 // RuleOnReport represents a single (hit) rule of the string encoded report
 type RuleOnReport struct {
 	Module          RuleID      `json:"component"`
