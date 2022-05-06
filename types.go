@@ -238,7 +238,7 @@ type HittingClustersData struct {
 	Cluster  ClusterName `json:"cluster"`
 	Name     string      `json:"cluster_name"`
 	LastSeen string      `json:"last_checked_at"`
-	//Version     string      `json:"version"`
+	Version  string      `json:"version"`
 }
 
 // HittingClusters is a data structure containing list of clusters hit by a concrete rule
