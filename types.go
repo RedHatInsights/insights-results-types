@@ -233,12 +233,17 @@ type HittingClustersMetadata struct {
 	Selector RuleSelector `json:"rule_id"`
 }
 
+// ClusterMetadata contains metadata information for a given cluster, like its version
+type ClusterMetadata struct {
+	Version Version `json:"cluster_version"`
+}
+
 // HittingClustersData used to store data of clusters hit by a concrete rule
 type HittingClustersData struct {
-	Cluster  ClusterName `json:"cluster"`
-	Name     string      `json:"cluster_name"`
-	LastSeen string      `json:"last_checked_at"`
-	//Version     string      `json:"version"`
+	Cluster  ClusterName     `json:"cluster"`
+	Name     string          `json:"cluster_name"`
+	LastSeen string          `json:"last_checked_at"`
+	Meta     ClusterMetadata `json:"meta"`
 }
 
 // HittingClusters is a data structure containing list of clusters hit by a concrete rule
