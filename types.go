@@ -398,8 +398,9 @@ type RuleParsingError string
 
 // ClusterRecommendationList is used for the clusters list
 type ClusterRecommendationList struct {
-	CreatedAt       time.Time `json:"created_at"`
-	Recommendations []RuleID  `json:"recommendations"`
+	CreatedAt       time.Time       `json:"created_at"`
+	Meta            ClusterMetadata `json:"meta"`
+	Recommendations []RuleID        `json:"recommendations"`
 }
 
 // ClusterRecommendationMap is used for the clusters list
