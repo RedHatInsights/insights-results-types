@@ -69,7 +69,7 @@ type RuleOnReport struct {
 	DisableFeedback string      `json:"disable_feedback"`
 	DisabledAt      Timestamp   `json:"disabled_at"`
 	TemplateData    interface{} `json:"details"`
-	CreatedAt       Timestamp   `json:"impacted"`
+	CreatedAt       Timestamp   `json:"impacted,omitempty"`
 }
 
 // ReportRules is a helper struct for easy JSON unmarshalling of string encoded report
