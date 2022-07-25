@@ -33,9 +33,30 @@ type Identity struct {
 	Internal      Internal `json:"internal"`
 }
 
+// User struct contains single user data passed in the auth token
+type User struct {
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	UserID   int    `json:"user_id"`
+}
+
+// IdentityV2 contains user info after July 22 modifications (org_id moved to top level)
+// will be replacing Identity after testing
+type IdentityV2 struct {
+	AccountNumber UserID `json:"account_number"`
+	OrgID         OrgID  `json:"org_id,string"`
+	User          User   `json:"user"`
+}
+
 // Token is x-rh-identity struct
 type Token struct {
 	Identity Identity `json:"identity"`
+}
+
+// TokenV2 is x-rh-identity struct after July 22 modifications (org_id moved to top level)
+// will be replacing Token after testing
+type TokenV2 struct {
+	IdentityV2 IdentityV2 `json:"identity"`
 }
 
 // JWTPayload is structure that contain data from parsed JWT token
