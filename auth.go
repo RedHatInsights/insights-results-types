@@ -37,7 +37,7 @@ type Identity struct {
 type User struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
-	UserID   int    `json:"user_id"`
+	UserID   string `json:"user_id"`
 }
 
 // IdentityV2 contains user info after July 22 modifications (org_id moved to top level)
