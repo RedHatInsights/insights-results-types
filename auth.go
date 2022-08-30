@@ -31,18 +31,20 @@ type Internal struct {
 type Identity struct {
 	AccountNumber UserID   `json:"account_number"`
 	Internal      Internal `json:"internal"`
+	User          User     `json:"user"`
 }
 
 // User struct contains single user data passed in the auth token
 type User struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
-	UserID   string `json:"user_id"`
+	UserID   UserID `json:"user_id"`
 }
 
 // IdentityV2 contains user info after July 22 modifications (org_id moved to top level)
 // will be replacing Identity after testing
 type IdentityV2 struct {
+	// AccountNumber to be removed after EBS/org_id migration is finalized
 	AccountNumber UserID `json:"account_number"`
 	OrgID         OrgID  `json:"org_id,string"`
 	User          User   `json:"user"`
