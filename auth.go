@@ -65,4 +65,5 @@ type TokenV2 struct {
 type JWTPayload struct {
 	AccountNumber UserID `json:"account_number"`
 	OrgID         OrgID  `json:"org_id,string"`
+	UserID        UserID `json:"user_id,string"`
 }
