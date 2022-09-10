@@ -48,6 +48,7 @@ type IdentityV2 struct {
 	AccountNumber UserID `json:"account_number"`
 	OrgID         OrgID  `json:"org_id,string"`
 	User          User   `json:"user"`
+	UserID        UserID `json:"user_id"`
 }
 
 // Token is x-rh-identity struct
