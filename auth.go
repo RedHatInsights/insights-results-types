@@ -22,18 +22,6 @@ const (
 	ContextKeyUser = ContextKey("user")
 )
 
-// Internal contains information about organization ID
-type Internal struct {
-	OrgID OrgID `json:"org_id,string"`
-}
-
-// Identity contains internal user info
-type Identity struct {
-	AccountNumber UserID   `json:"account_number"`
-	Internal      Internal `json:"internal"`
-	User          User     `json:"user"`
-}
-
 // User struct contains single user data passed in the auth token
 type User struct {
 	Username string `json:"username"`
@@ -41,14 +29,11 @@ type User struct {
 	UserID   UserID `json:"user_id"`
 }
 
-// IdentityV2 contains user info after July 22 modifications (org_id moved to top level)
-// will be replacing Identity after testing
-type IdentityV2 struct {
-	// AccountNumber to be removed after EBS/org_id migration is finalized
+// Identity contains information about users and their organization
+type Identity struct {
 	AccountNumber UserID `json:"account_number"`
 	OrgID         OrgID  `json:"org_id,string"`
 	User          User   `json:"user"`
-	UserID        UserID `json:"user_id"`
 }
 
 // Token is x-rh-identity struct
@@ -56,13 +41,8 @@ type Token struct {
 	Identity Identity `json:"identity"`
 }
 
-// TokenV2 is x-rh-identity struct after July 22 modifications (org_id moved to top level)
-// will be replacing Token after testing
-type TokenV2 struct {
-	IdentityV2 IdentityV2 `json:"identity"`
-}
-
 // JWTPayload is structure that contain data from parsed JWT token
+// jwt auth type is not used and will be removed
 type JWTPayload struct {
 	AccountNumber UserID `json:"account_number"`
 	OrgID         OrgID  `json:"org_id,string"`
