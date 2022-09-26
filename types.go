@@ -256,12 +256,32 @@ type HittingClusters struct {
 	Status      string                  `json:"status"`
 }
 
+// ClusterInfo is a data structure containing some relevant cluster information
+type ClusterInfo struct {
+	ID          ClusterName `json:"cluster_id"`
+	DisplayName string      `json:"display_name"`
+	Managed     bool        `json:"managed"`
+	Status      string      `json:"status"`
+}
+
 // DisabledClusterInfo represents information about disabled clusters for /clusters_detail
 type DisabledClusterInfo struct {
 	ClusterID     ClusterName `json:"cluster_id"`
 	ClusterName   string      `json:"cluster_name"`
 	DisabledAt    time.Time   `json:"disabled_at"`
 	Justification string      `json:"justification"`
+}
+
+// ClustersDetailData is the inner data structure for /clusters_detail
+type ClustersDetailData struct {
+	EnabledClusters  []HittingClustersData `json:"enabled"`
+	DisabledClusters []DisabledClusterInfo `json:"disabled"`
+}
+
+// ClustersDetailResponse is a data structure used as the response for /clusters_detail
+type ClustersDetailResponse struct {
+	Data   ClustersDetailData `json:"data"`
+	Status string             `json:"status"`
 }
 
 // DatabaseVersion specifies the latest version the database has been migrated
