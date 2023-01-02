@@ -145,20 +145,21 @@ type Rule struct {
 
 // RuleErrorKey represents the content of rule_error_key table
 type RuleErrorKey struct {
-	ErrorKey    ErrorKey  `json:"error_key"`
-	RuleModule  RuleID    `json:"rule_module"`
-	Condition   string    `json:"condition"`
-	Description string    `json:"description"`
-	Impact      int       `json:"impact"`
-	Likelihood  int       `json:"likelihood"`
-	PublishDate time.Time `json:"publish_date"`
-	Active      bool      `json:"active"`
-	Generic     string    `json:"generic"`
-	Summary     string    `json:"summary"`
-	Reason      string    `json:"reason"`
-	Resolution  string    `json:"resolution"`
-	MoreInfo    string    `json:"more_info"`
-	Tags        []string  `json:"tags"`
+	ErrorKey       ErrorKey  `json:"error_key"`
+	RuleModule     RuleID    `json:"rule_module"`
+	Condition      string    `json:"condition"`
+	Description    string    `json:"description"`
+	Impact         int       `json:"impact"`
+	Likelihood     int       `json:"likelihood"`
+	ResolutionRisk int       `json:"resolution_risk"`
+	PublishDate    time.Time `json:"publish_date"`
+	Active         bool      `json:"active"`
+	Generic        string    `json:"generic"`
+	Summary        string    `json:"summary"`
+	Reason         string    `json:"reason"`
+	Resolution     string    `json:"resolution"`
+	MoreInfo       string    `json:"more_info"`
+	Tags           []string  `json:"tags"`
 }
 
 // RuleWithContent represents a rule with content, basically the mix of rule and rule_error_key tables' content
