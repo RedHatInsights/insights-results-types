@@ -51,12 +51,13 @@ type RuleErrorKeyContent struct {
 // ErrorKeyMetadata is a Go representation of the `metadata.yaml`
 // file inside of an error key content directory.
 type ErrorKeyMetadata struct {
-	Description string   `yaml:"description" json:"description"`
-	Impact      Impact   `yaml:"impact" json:"impact"`
-	Likelihood  int      `yaml:"likelihood" json:"likelihood"`
-	PublishDate string   `yaml:"publish_date" json:"publish_date"`
-	Status      string   `yaml:"status" json:"status"`
-	Tags        []string `yaml:"tags" json:"tags"`
+	Description    string   `yaml:"description" json:"description"`
+	Impact         Impact   `yaml:"impact" json:"impact"`
+	Likelihood     int      `yaml:"likelihood" json:"likelihood"`
+	PublishDate    string   `yaml:"publish_date" json:"publish_date"`
+	ResolutionRisk int      `yaml:"resolution_risk" json:"resolution_risk"`
+	Status         string   `yaml:"status" json:"status"`
+	Tags           []string `yaml:"tags" json:"tags"`
 }
 
 // Impact is contained in ErrorKeyMetadata
@@ -74,7 +75,8 @@ type RuleContentDirectory struct {
 // GlobalRuleConfig represents the file that contains
 // metadata globally applicable to any/all rule content.
 type GlobalRuleConfig struct {
-	Impact map[string]int `yaml:"impact" json:"impact"`
+	Impact         map[string]int `yaml:"impact" json:"impact"`
+	ResolutionRisk map[string]int `yaml:"resolution_risk" json:"resolution_risk"`
 }
 
 // RuleContentV1 version 1 of RuleConted provided by smart proxy
