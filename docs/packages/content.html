@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2021 Red Hat, Inc
+ Copyright 2023 Red Hat, Inc
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -195,12 +195,13 @@ file inside of the rule content directory.</p>
 file inside of an error key content directory.</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ErrorKeyMetadata</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">Description</div> <div class="ident">string</div>   <div class="literal">`yaml:&#34;description&#34; json:&#34;description&#34;`</div><div class="operator"></div>
-	<div class="ident">Impact</div>      <div class="ident">Impact</div>   <div class="literal">`yaml:&#34;impact&#34; json:&#34;impact&#34;`</div><div class="operator"></div>
-	<div class="ident">Likelihood</div>  <div class="ident">int</div>      <div class="literal">`yaml:&#34;likelihood&#34; json:&#34;likelihood&#34;`</div><div class="operator"></div>
-	<div class="ident">PublishDate</div> <div class="ident">string</div>   <div class="literal">`yaml:&#34;publish_date&#34; json:&#34;publish_date&#34;`</div><div class="operator"></div>
-	<div class="ident">Status</div>      <div class="ident">string</div>   <div class="literal">`yaml:&#34;status&#34; json:&#34;status&#34;`</div><div class="operator"></div>
-	<div class="ident">Tags</div>        <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div> <div class="literal">`yaml:&#34;tags&#34; json:&#34;tags&#34;`</div><div class="operator"></div>
+	<div class="ident">Description</div>    <div class="ident">string</div>   <div class="literal">`yaml:&#34;description&#34; json:&#34;description&#34;`</div><div class="operator"></div>
+	<div class="ident">Impact</div>         <div class="ident">Impact</div>   <div class="literal">`yaml:&#34;impact&#34; json:&#34;impact&#34;`</div><div class="operator"></div>
+	<div class="ident">Likelihood</div>     <div class="ident">int</div>      <div class="literal">`yaml:&#34;likelihood&#34; json:&#34;likelihood&#34;`</div><div class="operator"></div>
+	<div class="ident">PublishDate</div>    <div class="ident">string</div>   <div class="literal">`yaml:&#34;publish_date&#34; json:&#34;publish_date&#34;`</div><div class="operator"></div>
+	<div class="ident">ResolutionRisk</div> <div class="ident">int</div>      <div class="literal">`yaml:&#34;resolution_risk&#34; json:&#34;resolution_risk&#34;`</div><div class="operator"></div>
+	<div class="ident">Status</div>         <div class="ident">string</div>   <div class="literal">`yaml:&#34;status&#34; json:&#34;status&#34;`</div><div class="operator"></div>
+	<div class="ident">Tags</div>           <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div> <div class="literal">`yaml:&#34;tags&#34; json:&#34;tags&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -233,7 +234,8 @@ file inside of an error key content directory.</p>
 metadata globally applicable to any/all rule content.</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">GlobalRuleConfig</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">Impact</div> <div class="keyword">map</div><div class="operator">[</div><div class="ident">string</div><div class="operator">]</div><div class="ident">int</div> <div class="literal">`yaml:&#34;impact&#34; json:&#34;impact&#34;`</div><div class="operator"></div>
+	<div class="ident">Impact</div>         <div class="keyword">map</div><div class="operator">[</div><div class="ident">string</div><div class="operator">]</div><div class="ident">int</div> <div class="literal">`yaml:&#34;impact&#34; json:&#34;impact&#34;`</div><div class="operator"></div>
+	<div class="ident">ResolutionRisk</div> <div class="keyword">map</div><div class="operator">[</div><div class="ident">string</div><div class="operator">]</div><div class="ident">int</div> <div class="literal">`yaml:&#34;resolution_risk&#34; json:&#34;resolution_risk&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
