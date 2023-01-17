@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2022 Red Hat, Inc
+ Copyright 2023 Red Hat, Inc
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -258,6 +258,7 @@ a unique identifier of payloads. Empty string represents a missing request ID.</
 	<div class="ident">DisableFeedback</div> <div class="ident">string</div>      <div class="literal">`json:&#34;disable_feedback&#34;`</div><div class="operator"></div>
 	<div class="ident">DisabledAt</div>      <div class="ident">Timestamp</div>   <div class="literal">`json:&#34;disabled_at&#34;`</div><div class="operator"></div>
 	<div class="ident">TemplateData</div>    <div class="keyword">interface</div><div class="operator">{</div><div class="operator">}</div> <div class="literal">`json:&#34;details&#34;`</div><div class="operator"></div>
+	<div class="ident">CreatedAt</div>       <div class="ident">Timestamp</div>   <div class="literal">`json:&#34;impacted,omitempty&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -325,7 +326,6 @@ separately from ReportResponse structure</p>
 	<div class="ident">Reason</div>       <div class="ident">string</div>      <div class="literal">`json:&#34;reason&#34;`</div><div class="operator"></div>
 	<div class="ident">Resolution</div>   <div class="ident">string</div>      <div class="literal">`json:&#34;resolution&#34;`</div><div class="operator"></div>
 	<div class="ident">TotalRisk</div>    <div class="ident">int</div>         <div class="literal">`json:&#34;total_risk&#34;`</div><div class="operator"></div>
-	<div class="ident">RiskOfChange</div> <div class="ident">int</div>         <div class="literal">`json:&#34;risk_of_change&#34;`</div><div class="operator"></div>
 	<div class="ident">RuleModule</div>   <div class="ident">RuleID</div>      <div class="literal">`json:&#34;rule_id&#34;`</div><div class="operator"></div>
 	<div class="ident">TemplateData</div> <div class="keyword">interface</div><div class="operator">{</div><div class="operator">}</div> <div class="literal">`json:&#34;extra_data&#34;`</div><div class="operator"></div>
 	<div class="ident">Tags</div>         <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div>    <div class="literal">`json:&#34;tags&#34;`</div><div class="operator"></div>
@@ -378,20 +378,21 @@ separately from ReportResponse structure</p>
 	<td class="doc"><p>RuleErrorKey represents the content of rule<em>error</em>key table</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">RuleErrorKey</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">ErrorKey</div>    <div class="ident">ErrorKey</div>  <div class="literal">`json:&#34;error_key&#34;`</div><div class="operator"></div>
-	<div class="ident">RuleModule</div>  <div class="ident">RuleID</div>    <div class="literal">`json:&#34;rule_module&#34;`</div><div class="operator"></div>
-	<div class="ident">Condition</div>   <div class="ident">string</div>    <div class="literal">`json:&#34;condition&#34;`</div><div class="operator"></div>
-	<div class="ident">Description</div> <div class="ident">string</div>    <div class="literal">`json:&#34;description&#34;`</div><div class="operator"></div>
-	<div class="ident">Impact</div>      <div class="ident">int</div>       <div class="literal">`json:&#34;impact&#34;`</div><div class="operator"></div>
-	<div class="ident">Likelihood</div>  <div class="ident">int</div>       <div class="literal">`json:&#34;likelihood&#34;`</div><div class="operator"></div>
-	<div class="ident">PublishDate</div> <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`json:&#34;publish_date&#34;`</div><div class="operator"></div>
-	<div class="ident">Active</div>      <div class="ident">bool</div>      <div class="literal">`json:&#34;active&#34;`</div><div class="operator"></div>
-	<div class="ident">Generic</div>     <div class="ident">string</div>    <div class="literal">`json:&#34;generic&#34;`</div><div class="operator"></div>
-	<div class="ident">Summary</div>     <div class="ident">string</div>    <div class="literal">`json:&#34;summary&#34;`</div><div class="operator"></div>
-	<div class="ident">Reason</div>      <div class="ident">string</div>    <div class="literal">`json:&#34;reason&#34;`</div><div class="operator"></div>
-	<div class="ident">Resolution</div>  <div class="ident">string</div>    <div class="literal">`json:&#34;resolution&#34;`</div><div class="operator"></div>
-	<div class="ident">MoreInfo</div>    <div class="ident">string</div>    <div class="literal">`json:&#34;more_info&#34;`</div><div class="operator"></div>
-	<div class="ident">Tags</div>        <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div>  <div class="literal">`json:&#34;tags&#34;`</div><div class="operator"></div>
+	<div class="ident">ErrorKey</div>       <div class="ident">ErrorKey</div>  <div class="literal">`json:&#34;error_key&#34;`</div><div class="operator"></div>
+	<div class="ident">RuleModule</div>     <div class="ident">RuleID</div>    <div class="literal">`json:&#34;rule_module&#34;`</div><div class="operator"></div>
+	<div class="ident">Condition</div>      <div class="ident">string</div>    <div class="literal">`json:&#34;condition&#34;`</div><div class="operator"></div>
+	<div class="ident">Description</div>    <div class="ident">string</div>    <div class="literal">`json:&#34;description&#34;`</div><div class="operator"></div>
+	<div class="ident">Impact</div>         <div class="ident">int</div>       <div class="literal">`json:&#34;impact&#34;`</div><div class="operator"></div>
+	<div class="ident">Likelihood</div>     <div class="ident">int</div>       <div class="literal">`json:&#34;likelihood&#34;`</div><div class="operator"></div>
+	<div class="ident">ResolutionRisk</div> <div class="ident">int</div>       <div class="literal">`json:&#34;resolution_risk&#34;`</div><div class="operator"></div>
+	<div class="ident">PublishDate</div>    <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`json:&#34;publish_date&#34;`</div><div class="operator"></div>
+	<div class="ident">Active</div>         <div class="ident">bool</div>      <div class="literal">`json:&#34;active&#34;`</div><div class="operator"></div>
+	<div class="ident">Generic</div>        <div class="ident">string</div>    <div class="literal">`json:&#34;generic&#34;`</div><div class="operator"></div>
+	<div class="ident">Summary</div>        <div class="ident">string</div>    <div class="literal">`json:&#34;summary&#34;`</div><div class="operator"></div>
+	<div class="ident">Reason</div>         <div class="ident">string</div>    <div class="literal">`json:&#34;reason&#34;`</div><div class="operator"></div>
+	<div class="ident">Resolution</div>     <div class="ident">string</div>    <div class="literal">`json:&#34;resolution&#34;`</div><div class="operator"></div>
+	<div class="ident">MoreInfo</div>       <div class="ident">string</div>    <div class="literal">`json:&#34;more_info&#34;`</div><div class="operator"></div>
+	<div class="ident">Tags</div>           <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div>  <div class="literal">`json:&#34;tags&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -401,22 +402,21 @@ separately from ReportResponse structure</p>
 	<td class="doc"><p>RuleWithContent represents a rule with content, basically the mix of rule and rule<em>error</em>key tables' content</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">RuleWithContent</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">Module</div>       <div class="ident">RuleID</div>    <div class="literal">`json:&#34;module&#34;`</div><div class="operator"></div>
-	<div class="ident">Name</div>         <div class="ident">string</div>    <div class="literal">`json:&#34;name&#34;`</div><div class="operator"></div>
-	<div class="ident">Summary</div>      <div class="ident">string</div>    <div class="literal">`json:&#34;summary&#34;`</div><div class="operator"></div>
-	<div class="ident">Reason</div>       <div class="ident">string</div>    <div class="literal">`json:&#34;reason&#34;`</div><div class="operator"></div>
-	<div class="ident">Resolution</div>   <div class="ident">string</div>    <div class="literal">`json:&#34;resolution&#34;`</div><div class="operator"></div>
-	<div class="ident">MoreInfo</div>     <div class="ident">string</div>    <div class="literal">`json:&#34;more_info&#34;`</div><div class="operator"></div>
-	<div class="ident">ErrorKey</div>     <div class="ident">ErrorKey</div>  <div class="literal">`json:&#34;error_key&#34;`</div><div class="operator"></div>
-	<div class="ident">Condition</div>    <div class="ident">string</div>    <div class="literal">`json:&#34;condition&#34;`</div><div class="operator"></div>
-	<div class="ident">Description</div>  <div class="ident">string</div>    <div class="literal">`json:&#34;description&#34;`</div><div class="operator"></div>
-	<div class="ident">TotalRisk</div>    <div class="ident">int</div>       <div class="literal">`json:&#34;total_risk&#34;`</div><div class="operator"></div>
-	<div class="ident">RiskOfChange</div> <div class="ident">int</div>       <div class="literal">`json:&#34;risk_of_change&#34;`</div><div class="operator"></div>
-	<div class="ident">PublishDate</div>  <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`json:&#34;publish_date&#34;`</div><div class="operator"></div>
-	<div class="ident">Active</div>       <div class="ident">bool</div>      <div class="literal">`json:&#34;active&#34;`</div><div class="operator"></div>
-	<div class="ident">Internal</div>     <div class="ident">bool</div>      <div class="literal">`json:&#34;internal&#34;`</div><div class="operator"></div>
-	<div class="ident">Generic</div>      <div class="ident">string</div>    <div class="literal">`json:&#34;generic&#34;`</div><div class="operator"></div>
-	<div class="ident">Tags</div>         <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div>  <div class="literal">`json:&#34;tags&#34;`</div><div class="operator"></div>
+	<div class="ident">Module</div>      <div class="ident">RuleID</div>    <div class="literal">`json:&#34;module&#34;`</div><div class="operator"></div>
+	<div class="ident">Name</div>        <div class="ident">string</div>    <div class="literal">`json:&#34;name&#34;`</div><div class="operator"></div>
+	<div class="ident">Summary</div>     <div class="ident">string</div>    <div class="literal">`json:&#34;summary&#34;`</div><div class="operator"></div>
+	<div class="ident">Reason</div>      <div class="ident">string</div>    <div class="literal">`json:&#34;reason&#34;`</div><div class="operator"></div>
+	<div class="ident">Resolution</div>  <div class="ident">string</div>    <div class="literal">`json:&#34;resolution&#34;`</div><div class="operator"></div>
+	<div class="ident">MoreInfo</div>    <div class="ident">string</div>    <div class="literal">`json:&#34;more_info&#34;`</div><div class="operator"></div>
+	<div class="ident">ErrorKey</div>    <div class="ident">ErrorKey</div>  <div class="literal">`json:&#34;error_key&#34;`</div><div class="operator"></div>
+	<div class="ident">Condition</div>   <div class="ident">string</div>    <div class="literal">`json:&#34;condition&#34;`</div><div class="operator"></div>
+	<div class="ident">Description</div> <div class="ident">string</div>    <div class="literal">`json:&#34;description&#34;`</div><div class="operator"></div>
+	<div class="ident">TotalRisk</div>   <div class="ident">int</div>       <div class="literal">`json:&#34;total_risk&#34;`</div><div class="operator"></div>
+	<div class="ident">PublishDate</div> <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`json:&#34;publish_date&#34;`</div><div class="operator"></div>
+	<div class="ident">Active</div>      <div class="ident">bool</div>      <div class="literal">`json:&#34;active&#34;`</div><div class="operator"></div>
+	<div class="ident">Internal</div>    <div class="ident">bool</div>      <div class="literal">`json:&#34;internal&#34;`</div><div class="operator"></div>
+	<div class="ident">Generic</div>     <div class="ident">string</div>    <div class="literal">`json:&#34;generic&#34;`</div><div class="operator"></div>
+	<div class="ident">Tags</div>        <div class="operator">[</div><div class="operator">]</div><div class="ident">string</div>  <div class="literal">`json:&#34;tags&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -536,19 +536,25 @@ aggregator to return more reports.</p>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>HittingClustersData used to store data of clusters hit by a concrete rule</p>
+	<td class="doc"><p>ClusterMetadata contains metadata information for a given cluster, like its version</p>
 </td>
-	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">HittingClustersData</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">Cluster</div>  <div class="ident">ClusterName</div> <div class="literal">`json:&#34;cluster&#34;`</div><div class="operator"></div>
-	<div class="ident">Name</div>     <div class="ident">string</div>      <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
-	<div class="ident">LastSeen</div> <div class="ident">string</div>      <div class="literal">`json:&#34;last_checked_at&#34;`</div><div class="operator"></div>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ClusterMetadata</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">Version</div> <div class="ident">Version</div> <div class="literal">`json:&#34;cluster_version&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
 </code></pre></td>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>Version     string      <code>json:&quot;version&quot;</code></p>
+	<td class="doc"><p>HittingClustersData used to store data of clusters hit by a concrete rule</p>
 </td>
-	<td class="code"><pre><code><div class="operator">}</div><div class="operator"></div>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">HittingClustersData</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">Cluster</div>       <div class="ident">ClusterName</div>     <div class="literal">`json:&#34;cluster&#34;`</div><div class="operator"></div>
+	<div class="ident">Name</div>          <div class="ident">string</div>          <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
+	<div class="ident">LastSeen</div>      <div class="ident">string</div>          <div class="literal">`json:&#34;last_checked_at&#34;`</div><div class="operator"></div>
+	<div class="ident">ImpactedSince</div> <div class="ident">string</div>          <div class="literal">`json:&#34;impacted&#34;`</div><div class="operator"></div>
+	<div class="ident">Meta</div>          <div class="ident">ClusterMetadata</div> <div class="literal">`json:&#34;meta&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
       </tr>
@@ -567,6 +573,19 @@ hitting the given rule.</p>
       </tr>
       
       <tr class="section">
+	<td class="doc"><p>ClusterInfo is a data structure containing some relevant cluster information</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ClusterInfo</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">ID</div>          <div class="ident">ClusterName</div> <div class="literal">`json:&#34;cluster_id&#34;`</div><div class="operator"></div>
+	<div class="ident">DisplayName</div> <div class="ident">string</div>      <div class="literal">`json:&#34;display_name&#34;`</div><div class="operator"></div>
+	<div class="ident">Managed</div>     <div class="ident">bool</div>        <div class="literal">`json:&#34;managed&#34;`</div><div class="operator"></div>
+	<div class="ident">Status</div>      <div class="ident">string</div>      <div class="literal">`json:&#34;status&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
 	<td class="doc"><p>DisabledClusterInfo represents information about disabled clusters for /clusters_detail</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">DisabledClusterInfo</div> <div class="keyword">struct</div> <div class="operator">{</div>
@@ -574,6 +593,28 @@ hitting the given rule.</p>
 	<div class="ident">ClusterName</div>   <div class="ident">string</div>      <div class="literal">`json:&#34;cluster_name&#34;`</div><div class="operator"></div>
 	<div class="ident">DisabledAt</div>    <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div>   <div class="literal">`json:&#34;disabled_at&#34;`</div><div class="operator"></div>
 	<div class="ident">Justification</div> <div class="ident">string</div>      <div class="literal">`json:&#34;justification&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>ClustersDetailData is the inner data structure for /clusters_detail</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ClustersDetailData</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">EnabledClusters</div>  <div class="operator">[</div><div class="operator">]</div><div class="ident">HittingClustersData</div> <div class="literal">`json:&#34;enabled&#34;`</div><div class="operator"></div>
+	<div class="ident">DisabledClusters</div> <div class="operator">[</div><div class="operator">]</div><div class="ident">DisabledClusterInfo</div> <div class="literal">`json:&#34;disabled&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>ClustersDetailResponse is a data structure used as the response for /clusters_detail</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ClustersDetailResponse</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">Data</div>   <div class="ident">ClustersDetailData</div> <div class="literal">`json:&#34;data&#34;`</div><div class="operator"></div>
+	<div class="ident">Status</div> <div class="ident">string</div>             <div class="literal">`json:&#34;status&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -822,8 +863,9 @@ Service</p>
 	<td class="doc"><p>ClusterRecommendationList is used for the clusters list</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ClusterRecommendationList</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">CreatedAt</div>       <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`json:&#34;created_at&#34;`</div><div class="operator"></div>
-	<div class="ident">Recommendations</div> <div class="operator">[</div><div class="operator">]</div><div class="ident">RuleID</div>  <div class="literal">`json:&#34;recommendations&#34;`</div><div class="operator"></div>
+	<div class="ident">CreatedAt</div>       <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div>       <div class="literal">`json:&#34;created_at&#34;`</div><div class="operator"></div>
+	<div class="ident">Meta</div>            <div class="ident">ClusterMetadata</div> <div class="literal">`json:&#34;meta&#34;`</div><div class="operator"></div>
+	<div class="ident">Recommendations</div> <div class="operator">[</div><div class="operator">]</div><div class="ident">RuleID</div>        <div class="literal">`json:&#34;recommendations&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>

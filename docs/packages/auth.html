@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- Copyright 2021 Red Hat, Inc
+ Copyright 2023 Red Hat, Inc
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -155,21 +155,24 @@ limitations under the License.</p>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>Internal contains information about organization ID</p>
+	<td class="doc"><p>User struct contains single user data passed in the auth token</p>
 </td>
-	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">Internal</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">OrgID</div> <div class="ident">OrgID</div> <div class="literal">`json:&#34;org_id,string&#34;`</div><div class="operator"></div>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">User</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">Username</div> <div class="ident">string</div> <div class="literal">`json:&#34;username&#34;`</div><div class="operator"></div>
+	<div class="ident">Email</div>    <div class="ident">string</div> <div class="literal">`json:&#34;email&#34;`</div><div class="operator"></div>
+	<div class="ident">UserID</div>   <div class="ident">UserID</div> <div class="literal">`json:&#34;user_id&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>Identity contains internal user info</p>
+	<td class="doc"><p>Identity contains information about users and their organization</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">Identity</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">AccountNumber</div> <div class="ident">UserID</div>   <div class="literal">`json:&#34;account_number&#34;`</div><div class="operator"></div>
-	<div class="ident">Internal</div>      <div class="ident">Internal</div> <div class="literal">`json:&#34;internal&#34;`</div><div class="operator"></div>
+	<div class="ident">AccountNumber</div> <div class="ident">UserID</div> <div class="literal">`json:&#34;account_number&#34;`</div><div class="operator"></div>
+	<div class="ident">OrgID</div>         <div class="ident">OrgID</div>  <div class="literal">`json:&#34;org_id,string&#34;`</div><div class="operator"></div>
+	<div class="ident">User</div>          <div class="ident">User</div>   <div class="literal">`json:&#34;user&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
@@ -186,11 +189,13 @@ limitations under the License.</p>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>JWTPayload is structure that contain data from parsed JWT token</p>
+	<td class="doc"><p>JWTPayload is structure that contain data from parsed JWT token
+jwt auth type is not used and will be removed</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">JWTPayload</div> <div class="keyword">struct</div> <div class="operator">{</div>
 	<div class="ident">AccountNumber</div> <div class="ident">UserID</div> <div class="literal">`json:&#34;account_number&#34;`</div><div class="operator"></div>
 	<div class="ident">OrgID</div>         <div class="ident">OrgID</div>  <div class="literal">`json:&#34;org_id,string&#34;`</div><div class="operator"></div>
+	<div class="ident">UserID</div>        <div class="ident">UserID</div> <div class="literal">`json:&#34;user_id&#34;`</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
