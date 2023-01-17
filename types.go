@@ -112,7 +112,6 @@ type RuleContentResponse struct {
 	Reason       string      `json:"reason"`
 	Resolution   string      `json:"resolution"`
 	TotalRisk    int         `json:"total_risk"`
-	RiskOfChange int         `json:"risk_of_change"`
 	RuleModule   RuleID      `json:"rule_id"`
 	TemplateData interface{} `json:"extra_data"`
 	Tags         []string    `json:"tags"`
@@ -164,22 +163,21 @@ type RuleErrorKey struct {
 
 // RuleWithContent represents a rule with content, basically the mix of rule and rule_error_key tables' content
 type RuleWithContent struct {
-	Module       RuleID    `json:"module"`
-	Name         string    `json:"name"`
-	Summary      string    `json:"summary"`
-	Reason       string    `json:"reason"`
-	Resolution   string    `json:"resolution"`
-	MoreInfo     string    `json:"more_info"`
-	ErrorKey     ErrorKey  `json:"error_key"`
-	Condition    string    `json:"condition"`
-	Description  string    `json:"description"`
-	TotalRisk    int       `json:"total_risk"`
-	RiskOfChange int       `json:"risk_of_change"`
-	PublishDate  time.Time `json:"publish_date"`
-	Active       bool      `json:"active"`
-	Internal     bool      `json:"internal"`
-	Generic      string    `json:"generic"`
-	Tags         []string  `json:"tags"`
+	Module      RuleID    `json:"module"`
+	Name        string    `json:"name"`
+	Summary     string    `json:"summary"`
+	Reason      string    `json:"reason"`
+	Resolution  string    `json:"resolution"`
+	MoreInfo    string    `json:"more_info"`
+	ErrorKey    ErrorKey  `json:"error_key"`
+	Condition   string    `json:"condition"`
+	Description string    `json:"description"`
+	TotalRisk   int       `json:"total_risk"`
+	PublishDate time.Time `json:"publish_date"`
+	Active      bool      `json:"active"`
+	Internal    bool      `json:"internal"`
+	Generic     string    `json:"generic"`
+	Tags        []string  `json:"tags"`
 }
 
 // ReportItem represents a single (hit) rule of the string encoded report
