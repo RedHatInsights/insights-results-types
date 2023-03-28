@@ -10,6 +10,10 @@
 
 Common data types used across the whole CCX data pipeline.
 
+### Class diagram with all types defined in this project
+
+[Class diagram](https://redhatinsights.github.io/insights-results-types/class_diagram.png)
+
 ### Note
 
 Please note that this repository should contain just "static" data types, which
