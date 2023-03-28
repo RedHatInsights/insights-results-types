@@ -1,0 +1,445 @@
+@startuml
+left to right direction
+
+namespace types {
+    class Acknowledgement << (S,Aquamarine) >> {
+        + Acknowledged bool
+        + Rule string
+        + Justification string
+        + CreatedBy string
+        + CreatedAt string
+        + UpdatedAt string
+
+    }
+    class AcknowledgementJustification << (S,Aquamarine) >> {
+        + Value string
+
+    }
+    class AcknowledgementRuleSelectorJustification << (S,Aquamarine) >> {
+        + RuleSelector RuleSelector
+        + Value string
+
+    }
+    class AcknowledgementsMetadata << (S,Aquamarine) >> {
+        + Count int
+
+    }
+    class AcknowledgementsResponse << (S,Aquamarine) >> {
+        + Metadata AcknowledgementsMetadata
+        + Data []Acknowledgement
+
+    }
+    class ClusterListInRequest << (S,Aquamarine) >> {
+        + Clusters []string
+
+    }
+    class ClusterRecommendationList << (S,Aquamarine) >> {
+        + CreatedAt time.Time
+        + Recommendations []RuleID
+
+    }
+    class ClusterReports << (S,Aquamarine) >> {
+        + ClusterList []ClusterName
+        + Errors []ClusterName
+        + Reports <font color=blue>map</font>[ClusterName]json.RawMessage
+        + GeneratedAt string
+        + Status string
+
+    }
+    class DatabaseVersionStruct << (S,Aquamarine) >> {
+        + DatabaseVersion DatabaseVersion
+
+    }
+    class DisabledClusterInfo << (S,Aquamarine) >> {
+        + ClusterID ClusterName
+        + ClusterName string
+        + DisabledAt time.Time
+        + Justification string
+
+    }
+    class DisabledRule << (S,Aquamarine) >> {
+        + ClusterID ClusterName
+        + RuleID RuleID
+        + ErrorKey ErrorKey
+        + Disabled RuleToggle
+        + DisabledAt sql.NullTime
+        + EnabledAt sql.NullTime
+        + UpdatedAt sql.NullTime
+
+    }
+    class DisabledRuleReason << (S,Aquamarine) >> {
+        + ClusterID ClusterName
+        + RuleID RuleID
+        + ErrorKey ErrorKey
+        + Message string
+        + AddedAt sql.NullTime
+        + UpdatedAt sql.NullTime
+
+    }
+    class DisabledRuleResponse << (S,Aquamarine) >> {
+        + RuleModule string
+        + Description string
+        + Generic string
+        + DisabledAt string
+
+    }
+    class ErrorKeyMetadata << (S,Aquamarine) >> {
+        + Description string
+        + Impact Impact
+        + Likelihood int
+        + PublishDate string
+        + Status string
+        + Tags []string
+
+    }
+    class ErrorKeyMetadataV1 << (S,Aquamarine) >> {
+        + Description string
+        + Impact string
+        + Likelihood int
+        + PublishDate string
+        + Status string
+        + Tags []string
+
+    }
+    class ErrorKeyMetadataV2 << (S,Aquamarine) >> {
+        + Description string
+        + Impact int
+        + Likelihood int
+        + PublishDate string
+        + Status string
+        + Tags []string
+
+    }
+    class GlobalRuleConfig << (S,Aquamarine) >> {
+        + Impact <font color=blue>map</font>[string]int
+
+    }
+    class HittingClusters << (S,Aquamarine) >> {
+        + Metadata HittingClustersMetadata
+        + ClusterList []HittingClustersData
+        + Status string
+
+    }
+    class HittingClustersData << (S,Aquamarine) >> {
+        + Cluster ClusterName
+        + Name string
+        + LastSeen string
+
+    }
+    class HittingClustersMetadata << (S,Aquamarine) >> {
+        + Count int
+        + Selector RuleSelector
+
+    }
+    class Identity << (S,Aquamarine) >> {
+        + AccountNumber UserID
+        + Internal Internal
+
+    }
+    class Impact << (S,Aquamarine) >> {
+        + Name string
+        + Impact int
+
+    }
+    class Internal << (S,Aquamarine) >> {
+        + OrgID OrgID
+
+    }
+    class JWTPayload << (S,Aquamarine) >> {
+        + AccountNumber UserID
+        + OrgID OrgID
+
+    }
+    class RecommendationListRow << (S,Aquamarine) >> {
+        + RuleID RuleID
+        + ImpactedClustersCnt ImpactedClustersCnt
+
+    }
+    class RecommendationRow << (S,Aquamarine) >> {
+        + RuleID RuleID
+        + RuleFQDN RuleFQDN
+        + ErrorKey ErrorKey
+        + OrgID OrgID
+        + ClusterID ClusterName
+        + CreatedAt sql.NullTime
+
+    }
+    class ReportItem << (S,Aquamarine) >> {
+        + Module RuleID
+        + ErrorKey ErrorKey
+        + TemplateData json.RawMessage
+
+    }
+    class ReportResponse << (S,Aquamarine) >> {
+        + Meta ReportResponseMeta
+        + Report []RuleOnReport
+
+    }
+    class ReportResponseMeta << (S,Aquamarine) >> {
+        + DisplayName string
+        + Count int
+        + LastCheckedAt Timestamp
+
+    }
+    class ReportResponseMetainfo << (S,Aquamarine) >> {
+        + Count int
+        + LastCheckedAt Timestamp
+        + StoredAt Timestamp
+
+    }
+    class ReportRules << (S,Aquamarine) >> {
+        + HitRules []RuleOnReport
+        + SkippedRules []RuleOnReport
+        + PassedRules []RuleOnReport
+        + TotalCount int
+
+    }
+    class Rule << (S,Aquamarine) >> {
+        + Module RuleID
+        + Name string
+        + Generic string
+        + Summary string
+        + Reason string
+        + Resolution string
+        + MoreInfo string
+
+    }
+    class RuleContent << (S,Aquamarine) >> {
+        + Plugin RulePluginInfo
+        + ErrorKeys <font color=blue>map</font>[string]RuleErrorKeyContent
+        + Generic string
+        + Summary string
+        + Resolution string
+        + MoreInfo string
+        + Reason string
+        + HasReason bool
+
+    }
+    class RuleContentDirectory << (S,Aquamarine) >> {
+        + Config GlobalRuleConfig
+        + Rules <font color=blue>map</font>[string]RuleContent
+
+    }
+    class RuleContentResponse << (S,Aquamarine) >> {
+        + CreatedAt string
+        + Description string
+        + ErrorKey string
+        + Generic string
+        + Reason string
+        + Resolution string
+        + TotalRisk int
+        + RiskOfChange int
+        + RuleModule RuleID
+        + TemplateData <font color=blue>interface</font>{}
+        + Tags []string
+        + UserVote UserVote
+        + Disabled bool
+        + Internal bool
+
+    }
+    class RuleContentStatus << (S,Aquamarine) >> {
+        + RuleType RuleType
+        + Loaded bool
+        + Error RuleParsingError
+
+    }
+    class RuleContentV1 << (S,Aquamarine) >> {
+        + Plugin RulePluginInfo
+        + ErrorKeys <font color=blue>map</font>[string]RuleErrorKeyContentV1
+        + Generic string
+        + Summary string
+        + Resolution string
+        + MoreInfo string
+        + Reason string
+        + HasReason bool
+
+    }
+    class RuleContentV2 << (S,Aquamarine) >> {
+        + Plugin RulePluginInfo
+        + ErrorKeys <font color=blue>map</font>[string]RuleErrorKeyContentV2
+        + Generic string
+        + Summary string
+        + Resolution string
+        + MoreInfo string
+        + Reason string
+        + HasReason bool
+
+    }
+    class RuleErrorKey << (S,Aquamarine) >> {
+        + ErrorKey ErrorKey
+        + RuleModule RuleID
+        + Condition string
+        + Description string
+        + Impact int
+        + Likelihood int
+        + PublishDate time.Time
+        + Active bool
+        + Generic string
+        + Summary string
+        + Reason string
+        + Resolution string
+        + MoreInfo string
+        + Tags []string
+
+    }
+    class RuleErrorKeyContent << (S,Aquamarine) >> {
+        + Metadata ErrorKeyMetadata
+        + TotalRisk int
+        + Generic string
+        + Summary string
+        + Resolution string
+        + MoreInfo string
+        + Reason string
+        + HasReason bool
+
+    }
+    class RuleErrorKeyContentV1 << (S,Aquamarine) >> {
+        + Metadata ErrorKeyMetadataV1
+        + TotalRisk int
+        + Generic string
+        + Summary string
+        + Resolution string
+        + MoreInfo string
+        + Reason string
+        + HasReason bool
+
+    }
+    class RuleErrorKeyContentV2 << (S,Aquamarine) >> {
+        + Metadata ErrorKeyMetadataV2
+        + TotalRisk int
+        + Generic string
+        + Summary string
+        + Resolution string
+        + MoreInfo string
+        + Reason string
+        + HasReason bool
+
+    }
+    class RuleOnReport << (S,Aquamarine) >> {
+        + Module RuleID
+        + ErrorKey ErrorKey
+        + UserVote UserVote
+        + Disabled bool
+        + DisableFeedback string
+        + DisabledAt Timestamp
+        + TemplateData <font color=blue>interface</font>{}
+
+    }
+    class RulePluginInfo << (S,Aquamarine) >> {
+        + Name string
+        + NodeID string
+        + ProductCode string
+        + PythonModule string
+
+    }
+    class RuleRating << (S,Aquamarine) >> {
+        + Rule string
+        + Rating UserVote
+
+    }
+    class RuleWithContent << (S,Aquamarine) >> {
+        + Module RuleID
+        + Name string
+        + Summary string
+        + Reason string
+        + Resolution string
+        + MoreInfo string
+        + ErrorKey ErrorKey
+        + Condition string
+        + Description string
+        + TotalRisk int
+        + RiskOfChange int
+        + PublishDate time.Time
+        + Active bool
+        + Internal bool
+        + Generic string
+        + Tags []string
+
+    }
+    class SystemWideRuleDisable << (S,Aquamarine) >> {
+        + OrgID OrgID
+        + UserID UserID
+        + RuleID RuleID
+        + ErrorKey ErrorKey
+        + Justification string
+        + CreatedAt sql.NullTime
+        + UpdatedAT sql.NullTime
+
+    }
+    class Token << (S,Aquamarine) >> {
+        + Identity Identity
+
+    }
+    class types.ClusterName << (T, #FF7700) >>  {
+    }
+    class types.ClusterRecommendationMap << (T, #FF7700) >>  {
+    }
+    class types.ClusterReport << (T, #FF7700) >>  {
+    }
+    class types.Component << (T, #FF7700) >>  {
+    }
+    class types.ContextKey << (T, #FF7700) >>  {
+    }
+    class types.DBDriver << (T, #FF7700) >>  {
+    }
+    class types.DatabaseVersion << (T, #FF7700) >>  {
+    }
+    class types.ErrorKey << (T, #FF7700) >>  {
+    }
+    class types.ImpactedClustersCnt << (T, #FF7700) >>  {
+    }
+    class types.KafkaOffset << (T, #FF7700) >>  {
+    }
+    class types.OrgID << (T, #FF7700) >>  {
+    }
+    class types.RecommendationImpactedClusters << (T, #FF7700) >>  {
+    }
+    class types.RequestID << (T, #FF7700) >>  {
+    }
+    class types.RuleFQDN << (T, #FF7700) >>  {
+    }
+    class types.RuleID << (T, #FF7700) >>  {
+    }
+    class types.RuleParsingError << (T, #FF7700) >>  {
+    }
+    class types.RuleSelector << (T, #FF7700) >>  {
+    }
+    class types.RuleToggle << (T, #FF7700) >>  {
+    }
+    class types.RuleType << (T, #FF7700) >>  {
+    }
+    class types.SchemaVersion << (T, #FF7700) >>  {
+    }
+    class types.Timestamp << (T, #FF7700) >>  {
+    }
+    class types.UserID << (T, #FF7700) >>  {
+    }
+    class types.UserVote << (T, #FF7700) >>  {
+    }
+}
+
+
+"__builtin__.int" #.. "types.DBDriver"
+"__builtin__.int" #.. "types.RuleToggle"
+"__builtin__.int" #.. "types.UserVote"
+"__builtin__.int64" #.. "types.KafkaOffset"
+"__builtin__.string" #.. "types.ClusterName"
+"__builtin__.string" #.. "types.ClusterReport"
+"__builtin__.string" #.. "types.Component"
+"__builtin__.string" #.. "types.ContextKey"
+"__builtin__.string" #.. "types.ErrorKey"
+"__builtin__.string" #.. "types.RequestID"
+"__builtin__.string" #.. "types.RuleFQDN"
+"__builtin__.string" #.. "types.RuleID"
+"__builtin__.string" #.. "types.RuleParsingError"
+"__builtin__.string" #.. "types.RuleSelector"
+"__builtin__.string" #.. "types.RuleType"
+"__builtin__.string" #.. "types.Timestamp"
+"__builtin__.string" #.. "types.UserID"
+"__builtin__.uint" #.. "types.DatabaseVersion"
+"__builtin__.uint32" #.. "types.ImpactedClustersCnt"
+"__builtin__.uint32" #.. "types.OrgID"
+"__builtin__.uint8" #.. "types.SchemaVersion"
+"types.<font color=blue>map</font>[ClusterName]{packageName}ClusterRecommendationList" #.. "types.ClusterRecommendationMap"
+"types.<font color=blue>map</font>[RuleID][]{packageName}ClusterName" #.. "types.RecommendationImpactedClusters"
+@enduml
