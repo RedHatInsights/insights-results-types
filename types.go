@@ -1,4 +1,4 @@
-// Copyright 2020, 2021  Red Hat, Inc
+// Copyright 2020, 2021, 2022, 2023  Red Hat, Inc
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -293,8 +293,8 @@ type DatabaseVersionStruct struct {
 	DatabaseVersion DatabaseVersion `json:"database_version"`
 }
 
-//SchemaVersion is just a constant integer for now, max value 255. If we one day
-//need more versions, better consider upgrading to semantic versioning.
+// SchemaVersion is just a constant integer for now, max value 255. If we one day
+// need more versions, better consider upgrading to semantic versioning.
 type SchemaVersion uint8
 
 // Acknowledgement represents user acknowledgement of given rule
@@ -426,3 +426,13 @@ type ClusterRecommendationList struct {
 
 // ClusterRecommendationMap is used for the clusters list
 type ClusterRecommendationMap map[ClusterName]ClusterRecommendationList
+
+// SimplifiedReport represents data structure to be stored in Redis
+type SimplifiedReport struct {
+	RequestID          string    `redis:"request_id"`
+	ClusterID          string    `redis:"cluster_id"`
+	OrgID              int       `redis:"org_id"`
+	ReceivedTimestamp  time.Time `redis:"received_timestamp"`
+	ProcessedTimestamp time.Time `redis:"processed_timestamp"`
+	RuleHitsCSV        string    `redis:"rule_hits"`
+}
