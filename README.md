@@ -1,5 +1,7 @@
 # insights-results-types
 
+[![forthebadge made-with-go](http://ForTheBadge.com/images/badges/made-with-go.svg)](https://go.dev/)
+
 [![GoDoc](https://godoc.org/github.com/RedHatInsights/insights-results-types?status.svg)](https://godoc.org/github.com/RedHatInsights/insights-results-types)
 [![GitHub Pages](https://img.shields.io/badge/%20-GitHub%20Pages-informational)](https://redhatinsights.github.io/insights-results-types/)
 [![Build Status](https://app.travis-ci.com/RedHatInsights/insights-results-types.svg?branch=master)](https://app.travis-ci.com/RedHatInsights/insights-results-types)
