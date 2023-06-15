@@ -116,7 +116,7 @@
     <tbody>
       
       <tr class="section">
-	<td class="doc"><p>Copyright 2020, 2021  Red Hat, Inc</p>
+	<td class="doc"><p>Copyright 2020, 2021, 2022, 2023  Red Hat, Inc</p>
 
 <p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 you may not use this file except in compliance with the License.
@@ -653,7 +653,7 @@ need more versions, better consider upgrading to semantic versioning.</p>
 	<td class="doc"><p>Acknowledgement represents user acknowledgement of given rule</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">Acknowledgement</div> <div class="keyword">struct</div> <div class="operator">{</div>
-	<div class="ident">Acknowledged</div>  <div class="ident">bool</div>   <div class="literal">`json:&#34;-&#34;`</div> <div class="operator"></div><div class="comment">// let&#39;s skip this one in responses</div>
+	<div class="ident">Acknowledged</div>  <div class="ident">bool</div>   <div class="literal">`json:&#34;-&#34;`</div> <div class="comment">// let&#39;s skip this one in responses</div><div class="operator"></div>
 	<div class="ident">Rule</div>          <div class="ident">string</div> <div class="literal">`json:&#34;rule&#34;`</div><div class="operator"></div>
 	<div class="ident">Justification</div> <div class="ident">string</div> <div class="literal">`json:&#34;justification&#34;`</div><div class="operator"></div>
 	<div class="ident">CreatedBy</div>     <div class="ident">string</div> <div class="literal">`json:&#34;created_by&#34;`</div><div class="operator"></div>
@@ -875,6 +875,21 @@ Service</p>
 	<td class="doc"><p>ClusterRecommendationMap is used for the clusters list</p>
 </td>
 	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">ClusterRecommendationMap</div> <div class="keyword">map</div><div class="operator">[</div><div class="ident">ClusterName</div><div class="operator">]</div><div class="ident">ClusterRecommendationList</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>SimplifiedReport represents data structure to be stored in Redis</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">SimplifiedReport</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">RequestID</div>          <div class="ident">string</div>    <div class="literal">`redis:&#34;request_id&#34;`</div><div class="operator"></div>
+	<div class="ident">ClusterID</div>          <div class="ident">string</div>    <div class="literal">`redis:&#34;cluster_id&#34;`</div><div class="operator"></div>
+	<div class="ident">OrgID</div>              <div class="ident">int</div>       <div class="literal">`redis:&#34;org_id&#34;`</div><div class="operator"></div>
+	<div class="ident">ReceivedTimestamp</div>  <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`redis:&#34;received_timestamp&#34;`</div><div class="operator"></div>
+	<div class="ident">ProcessedTimestamp</div> <div class="ident">time</div><div class="operator">.</div><div class="ident">Time</div> <div class="literal">`redis:&#34;processed_timestamp&#34;`</div><div class="operator"></div>
+	<div class="ident">RuleHitsCSV</div>        <div class="ident">string</div>    <div class="literal">`redis:&#34;rule_hits&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
 
 </code></pre></td>
       </tr>
