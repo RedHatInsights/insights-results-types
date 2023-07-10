@@ -14,6 +14,7 @@ Please delete options that are not relevant.
 - This change requires a documentation update
 - Refactor (refactoring code, removing useless files)
 - Documentation update
+- Configuration update
 
 ## Testing steps
 
