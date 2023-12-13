@@ -194,10 +194,8 @@ type KafkaOffset int64
 type DBDriver int
 
 const (
-	// DBDriverSQLite3 shows that db driver is sqlite
-	DBDriverSQLite3 DBDriver = iota
 	// DBDriverPostgres shows that db driver is postgres
-	DBDriverPostgres
+	DBDriverPostgres DBDriver = iota
 	// DBDriverGeneral general sql(used for mock now)
 	DBDriverGeneral
 )
