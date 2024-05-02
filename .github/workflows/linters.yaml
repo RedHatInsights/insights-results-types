@@ -19,5 +19,22 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Style linters
-        run: make style
+      - name: go formatting
+        run: make fmt
+      - name: go lint 
+        run: make lint
+      - name: go vet
+        run: make vet
+      - name: gocyclo
+        run: make cyclo
+      - name : gosec
+        run: make gosec
+      - name: errcheck
+        run: make errcheck
+      - name: goconst checker
+        run: make goconst
+      - name: ineffassign checker
+        run: make ineffassign
+      - name: ABC metrics checker
+        run: make abcgo
+
