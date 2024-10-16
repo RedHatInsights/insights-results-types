@@ -29,11 +29,18 @@ type User struct {
 	UserID   UserID `json:"user_id"`
 }
 
+type ServiceAccount struct {
+	ClientID string `json:"client_id"`
+	Username string `json:"username"`
+}
+
 // Identity contains information about users and their organization
 type Identity struct {
-	AccountNumber UserID `json:"account_number"`
-	OrgID         OrgID  `json:"org_id,string"`
-	User          User   `json:"user"`
+	AccountNumber  UserID         `json:"account_number"`
+	OrgID          OrgID          `json:"org_id,string"`
+	User           User           `json:"user,omitempty"`
+	ServiceAccount ServiceAccount `json:"service_account,omitempty"`
+	Type           string         `json:"type"`
 }
 
 // Token is x-rh-identity struct
