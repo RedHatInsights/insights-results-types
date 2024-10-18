@@ -36,7 +36,7 @@ type ServiceAccount struct {
 
 // Identity contains information about users and their organization
 type Identity struct {
-	AccountNumber  UserID         `json:"account_number"`
+	AccountNumber  AccountNumber  `json:"account_number"`
 	OrgID          OrgID          `json:"org_id,string"`
 	User           User           `json:"user,omitempty"`
 	ServiceAccount ServiceAccount `json:"service_account,omitempty"`
@@ -51,7 +51,7 @@ type Token struct {
 // JWTPayload is structure that contain data from parsed JWT token
 // jwt auth type is not used and will be removed
 type JWTPayload struct {
-	AccountNumber UserID `json:"account_number"`
-	OrgID         OrgID  `json:"org_id,string"`
-	UserID        UserID `json:"user_id"`
+	AccountNumber AccountNumber `json:"account_number"`
+	OrgID         OrgID         `json:"org_id,string"`
+	UserID        UserID        `json:"user_id"`
 }
