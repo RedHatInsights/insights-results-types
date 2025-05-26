@@ -1,48 +1,27 @@
-.PHONY: help clean build fmt lint vet run test style cyclo license godoc install_docgo install_addlicense
+.PHONY: help clean build fmt lint run test style license godoc install_docgo install_addlicense
 
 SOURCES:=$(shell find . -name '*.go')
 DOCFILES:=$(addprefix docs/packages/, $(addsuffix .html, $(basename ${SOURCES})))
 
-fmt: ## Run go fmt -w for all sources
+install_golangci-lint:
+	go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
+
+fmt: install_golangci-lint ## Run go formatting
 	@echo "Running go formatting"
-	./gofmt.sh
+	golangci-lint fmt
 
-lint: ## Run golint
-	@echo "Running go lint"
-	./golint.sh
-
-vet: ## Run go vet. Report likely mistakes in source code
-	@echo "Running go vet"
-	./govet.sh
-
-cyclo: ## Run gocyclo
-	@echo "Running gocyclo"
-	./gocyclo.sh
-
-ineffassign: ## Run ineffassign checker
-	@echo "Running ineffassign checker"
-	./ineffassign.sh
+lint: install_golangci-lint ## Run go liting
+	@echo "Running go linting"
+	golangci-lint run --fix
 
 shellcheck: ## Run shellcheck
 	shellcheck *.sh
-
-errcheck: ## Run errcheck
-	@echo "Running errcheck"
-	./goerrcheck.sh
-
-goconst: ## Run goconst checker
-	@echo "Running goconst checker"
-	./goconst.sh
-
-gosec: ## Run gosec checker
-	@echo "Running gosec checker"
-	./gosec.sh
 
 abcgo: ## Run ABC metrics checker
 	@echo "Run ABC metrics checker"
 	./abcgo.sh
 
-style: fmt vet lint cyclo errcheck goconst gosec ineffassign abcgo ## Run all the formatting related commands (fmt, vet, lint, cyclo) + check shell scripts
+style: fmt lint abcgo ## Run all the formatting related commands (fmt, lint, cyclo) + check shell scripts
 
 help: ## Show this help screen
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'
