@@ -20,10 +20,6 @@ linters:
       min-occurrences: 3
   exclusions:
     rules:
-      # Exclude gosec from running on tests files.
-      - path: _test\.go
-        linters:
-          - gosec
       - path: pg_consts.go
         linters:
           - unused
