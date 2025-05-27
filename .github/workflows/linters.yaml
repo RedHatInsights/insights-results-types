@@ -6,35 +6,14 @@ on:
 
 jobs:
   golint:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        go-version:
-          - "1.20"
-          - "1.21"
-    name: Linters for Go ${{ matrix.go-version}}
+    runs-on: ubuntu-latest
+    name: Linters for Go
     steps:
       - uses: actions/checkout@v4
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
-          go-version: ${{ matrix.go-version }}
-      - name: go formatting
-        run: make fmt
-      - name: go lint 
-        run: make lint
-      - name: go vet
-        run: make vet
-      - name: gocyclo
-        run: make cyclo
-      - name : gosec
-        run: make gosec
-      - name: errcheck
-        run: make errcheck
-      - name: goconst checker
-        run: make goconst
-      - name: ineffassign checker
-        run: make ineffassign
+          go-version: "1.23"
       - name: ABC metrics checker
         run: make abcgo
 

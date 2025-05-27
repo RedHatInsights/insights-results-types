@@ -1,3 +1,29 @@
-run:
-    skip-files:
-        - pg_consts.go
+version: "2"
+linters:
+  enable:
+    - errcheck
+    - goconst
+    - gocyclo
+    - gosec
+    - govet
+    - ineffassign
+    - nilerr
+    - prealloc
+    # - revive
+    - staticcheck
+    # - unconvert
+    - unused
+    # - whitespace
+    # - zerologlint
+  settings:
+    goconst:
+      min-occurrences: 3
+  exclusions:
+    rules:
+      - path: pg_consts.go
+        linters:
+          - unused
+formatters:
+  enable:
+    - gofmt
+    - goimports
